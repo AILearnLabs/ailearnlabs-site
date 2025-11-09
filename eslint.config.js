@@ -1,9 +1,10 @@
-import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import eslintPluginAstro from 'eslint-plugin-astro';
+// eslint.config.js (ESM, ESLint v9)
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import astro from 'eslint-plugin-astro'
 
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
-  ...eslintPluginAstro.configs.recommended, // flat-config for .astro files
-];
+  ...astro.configs.recommended, // <-- ESM: this is an array
+]

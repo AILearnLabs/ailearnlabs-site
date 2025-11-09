@@ -1,0 +1,9 @@
+---
+export interface Props { q: string; a: string }
+const { q, a } = Astro.props as Props;
+---
+<details class="rounded-md border border-slate-200 dark:border-slate-700 p-4 bg-white/70 dark:bg-slate-900/40">
+  <summary class="cursor-pointer font-medium">{q}</summary>
+  <p class="mt-2 muted">{a}</p>
+</details>
+

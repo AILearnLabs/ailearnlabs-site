@@ -1,0 +1,13 @@
+---
+export interface Props {
+  quote: string;
+  name: string;
+  role: string;
+}
+const { quote, name, role } = Astro.props as Props;
+---
+<figure class="rounded-lg border border-slate-200 dark:border-slate-700 p-6 bg-white/70 dark:bg-slate-900/40">
+  <blockquote class="text-lg">“{quote}”</blockquote>
+  <figcaption class="mt-4 text-sm muted">— {name}, {role}</figcaption>
+</figure>
+

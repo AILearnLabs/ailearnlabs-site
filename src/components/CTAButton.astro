@@ -1,0 +1,19 @@
+---
+export interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary';
+  ariaLabel?: string;
+}
+const { href, type = 'button', variant = 'primary', ariaLabel } = Astro.props as Props;
+---
+{href ? (
+  <a href={href} class={`btn ${variant === 'primary' ? 'btn-primary' : 'btn-secondary'}`} aria-label={ariaLabel}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={`btn ${variant === 'primary' ? 'btn-primary' : 'btn-secondary'}`} aria-label={ariaLabel}>
+    <slot />
+  </button>
+)}
+

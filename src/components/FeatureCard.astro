@@ -1,0 +1,19 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  icon: string;
+}
+const { title, description, icon } = Astro.props as Props;
+---
+<div class="rounded-lg border border-slate-200 dark:border-slate-700 p-6 bg-white/70 dark:bg-slate-900/40 backdrop-blur">
+  <div class="mb-4 text-primary">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d={icon} />
+    </svg>
+  </div>
+  <h3 class="text-xl font-semibold">{title}</h3>
+  <p class="muted mt-2">{description}</p>
+  
+</div>
+

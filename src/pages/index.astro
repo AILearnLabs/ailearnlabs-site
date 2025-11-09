@@ -1,0 +1,154 @@
+---
+import Base from "../layouts/Base.astro";
+import SEO from "../components/SEO.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import FAQItem from "../components/FAQItem.astro";
+import NewsletterForm from "../components/NewsletterForm.astro";
+import ContactForm from "../components/ContactForm.astro";
+
+const features = [
+  { title: 'Step-by-step tutorials', description: 'Short lessons that help you ship.', icon: 'M12 2v20M5 9l7-7 7 7' },
+  { title: 'Tool reviews that matter', description: 'What to use, when, and why.', icon: 'M3 12h18M3 6h18M3 18h18' },
+  { title: 'Project blueprints', description: 'Copy-ready templates to learn by doing.', icon: 'M4 4h16v16H4z' },
+  { title: 'Weekly digest', description: 'A curated email with the best updates.', icon: 'M4 6l8 6 8-6' },
+];
+
+const faqs = [
+  { q: 'Who is AILearnLabs for?', a: 'Builders who want to learn practical AI tools fast.' },
+  { q: 'What do I get in the newsletter?', a: 'Actionable tutorials, honest tool reviews, and mini-projects.' },
+  { q: 'Is there a free resource?', a: 'Yes — the AI Starter Guide (PDF) with a 12-page quickstart.' },
+  { q: 'How often do you email?', a: 'Weekly, with occasional bonus resources.' },
+  { q: 'Can I unsubscribe?', a: 'Of course. Every email includes a one-click unsubscribe.' },
+  { q: 'Do you spam or sell data?', a: 'No spam. We never sell your data. See Privacy Policy.' },
+];
+
+const testimonials = [
+  { quote: 'The first tutorial helped me ship a project in a weekend.', name: 'Alex P.', role: 'Indie Hacker' },
+  { quote: 'Finally, reviews that explain trade-offs without hype.', name: 'Maya R.', role: 'Product Engineer' },
+  { quote: 'The blueprints save me hours. Clear, concise, practical.', name: 'Chris D.', role: 'Student' },
+];
+---
+<Base title="AILearnLabs — Learn AI tools faster" description="Actionable tutorials, tool reviews, and mini-projects. No fluff—just what helps you build.">
+  <Fragment slot="seo">
+    <SEO title="AILearnLabs — Learn AI tools faster" description="Actionable tutorials, tool reviews, and mini-projects. No fluff—just what helps you build." />
+  </Fragment>
+  <Header />
+
+  <main id="content">
+    <!-- Hero -->
+    <section class="section">
+      <div class="container grid gap-8 lg:grid-cols-2 items-center">
+        <div>
+          <h1 class="text-4xl sm:text-5xl font-bold">Learn AI tools faster</h1>
+          <p class="muted mt-4 text-lg">Actionable tutorials, tool reviews, and mini-projects. No fluff—just what helps you build.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#newsletter" class="btn btn-primary">Get the free starter guide</a>
+            <a href="#newsletter" class="btn btn-secondary">Join the newsletter</a>
+          </div>
+          <div class="mt-8">
+            <div class="flex items-center gap-6 opacity-80" aria-label="As seen in">
+              <img src="/logos/placeholder1.svg" alt="Logo 1" class="h-6" />
+              <img src="/logos/placeholder2.svg" alt="Logo 2" class="h-6" />
+              <img src="/logos/placeholder3.svg" alt="Logo 3" class="h-6" />
+              <img src="/logos/placeholder4.svg" alt="Logo 4" class="h-6" />
+            </div>
+          </div>
+        </div>
+        <div class="relative">
+          <img src="/guide-mockup.svg" alt="AI Starter Guide preview" class="w-full max-w-md mx-auto" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section bg-slate-50 dark:bg-slate-900/30">
+      <div class="container">
+        <h2 class="section-title">Why AILearnLabs</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((f) => <FeatureCard {...f} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="section">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <ol class="grid sm:grid-cols-3 gap-6 list-none counter-reset step">
+          <li class="rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+            <h3 class="font-semibold mb-2">1) Pick a tutorial</h3>
+            <p class="muted">Choose a focused lesson tailored to your goal.</p>
+          </li>
+          <li class="rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+            <h3 class="font-semibold mb-2">2) Build a mini-project</h3>
+            <p class="muted">Follow a blueprint that gets you shipping.</p>
+          </li>
+          <li class="rounded-lg border border-slate-200 dark:border-slate-700 p-6">
+            <h3 class="font-semibold mb-2">3) Apply and iterate</h3>
+            <p class="muted">Use reviews and tips to refine your stack.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter" class="section bg-slate-50 dark:bg-slate-900/30">
+      <div class="container grid gap-8 lg:grid-cols-2 items-start">
+        <div>
+          <h2 class="section-title">Get the free starter guide</h2>
+          <p class="muted">Grab the AI Starter Guide (PDF). A 12-page quickstart to the tools you’ll actually use.</p>
+          <div class="mt-6">
+            <NewsletterForm />
+          </div>
+        </div>
+        <div id="guide" class="rounded-xl border border-slate-200 dark:border-slate-700 p-6 bg-white/70 dark:bg-slate-900/40">
+          <img src="/guide-mockup.svg" alt="AI Starter Guide cover" class="w-full" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials carousel -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">What readers say</h2>
+        <div class="relative">
+          <div id="carousel" class="grid sm:grid-cols-3 gap-6">
+            {testimonials.map((t) => <TestimonialCard {...t} />)}
+          </div>
+        </div>
+      </div>
+      <script>
+        // Lightweight progressive enhancement: auto-scroll on small screens
+        setInterval(() => {
+          const el = document.getElementById('carousel');
+          if (!el) return;
+          el.scrollBy({ left: el.clientWidth, behavior: 'smooth' });
+        }, 6000);
+      </script>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section bg-slate-50 dark:bg-slate-900/30">
+      <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {faqs.map((f) => <FAQItem {...f} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <ContactForm />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+

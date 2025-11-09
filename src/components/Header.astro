@@ -1,0 +1,23 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import CTAButton from "./CTAButton.astro";
+---
+<header class="border-b border-slate-200/50 dark:border-slate-700/50">
+  <div class="container flex items-center justify-between py-4">
+    <a href="/" class="flex items-center gap-2" aria-label="AILearnLabs home">
+      <img src="/logo.svg" alt="AILearnLabs logo" class="h-8 w-auto" />
+      <span class="font-display text-xl text-text dark:text-textDark">AILearnLabs</span>
+    </a>
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-6">
+      <a class="muted hover:text-primary" href="#features">Features</a>
+      <a class="muted hover:text-primary" href="#how">How it works</a>
+      <a class="muted hover:text-primary" href="#guide">Guide</a>
+      <a class="muted hover:text-primary" href="#faq">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <CTAButton href="#newsletter" variant="primary" ariaLabel="Get the free starter guide">Get the free starter guide</CTAButton>
+    </div>
+  </div>
+</header>
+

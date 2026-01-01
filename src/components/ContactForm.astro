@@ -1,0 +1,63 @@
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+---
+<form id="contact" class="w-full max-w-2xl" method="POST" action="/submit">
+  <input type="hidden" name="type" value="contact" />
+  <div class="grid sm:grid-cols-2 gap-3">
+    <div>
+      <label for="name" class="block text-sm mb-1">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" class="w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
+    </div>
+    <div>
+      <label for="cemail" class="block text-sm mb-1">Email</label>
+      <input id="cemail" name="email" type="email" required placeholder="you@example.com" class="w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
+    </div>
+  </div>
+  <div class="mt-3">
+    <label for="message" class="block text-sm mb-1">Message</label>
+    <textarea id="message" name="message" rows="4" required placeholder="How can we help?" class="w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2"></textarea>
+  </div>
+  <div class="mt-3">
+    <div class="cf-turnstile" data-sitekey={siteKey} data-size="compact"></div>
+  </div>
+  <div class="mt-4 flex items-center gap-3">
+    <button type="submit" class="btn btn-primary">Send message</button>
+    <p id="c-error" class="text-red-600 hidden" role="alert"></p>
+  </div>
+</form>
+
+<script type="module">
+  import { isValidEmail, validateMessage } from "../lib/validate";
+  const form = document.getElementById('contact');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formEl = e.currentTarget as HTMLFormElement;
+    const error = document.getElementById('c-error')!;
+    error.classList.add('hidden');
+    const fd = new FormData(formEl);
+    const email = String(fd.get('email') || '').trim();
+    const message = String(fd.get('message') || '').trim();
+    if (!isValidEmail(email)) {
+      error.textContent = 'Please enter a valid email address.';
+      error.classList.remove('hidden');
+      return;
+    }
+    if (!validateMessage(message)) {
+      error.textContent = 'Please enter a message (10-2000 chars).';
+      error.classList.remove('hidden');
+      return;
+    }
+    try {
+      const res = await fetch('/submit', { method: 'POST', body: fd });
+      if (res.ok) {
+        window.location.href = '/success';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        error.textContent = data?.error || 'Something went wrong. Please try again.';
+        error.classList.remove('hidden');
+      }
+    } catch {
+      error.textContent = 'Network error. Please try again.';
+      error.classList.remove('hidden');
+    }
+  });
+</script>

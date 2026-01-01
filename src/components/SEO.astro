@@ -1,0 +1,28 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+}
+const { title, description, canonical, ogImage = "/og-image.png" } = Astro.props;
+const site = Astro.site?.toString() ?? "https://ailearnlabs.pages.dev";
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical ?? Astro.url.href} />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AILearnLabs" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={Astro.url.href} />
+<meta property="og:image" content={new URL(ogImage, site).toString()} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(ogImage, site).toString()} />
+

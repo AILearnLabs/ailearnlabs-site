@@ -1,0 +1,46 @@
+---
+import "../styles/globals.css";
+const { title = "AILearnLabs", description = "Learn AI tools faster. Build projects that matter." } = Astro.props as {
+  title?: string;
+  description?: string;
+};
+---
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#2563EB" />
+    <!-- Fonts: preconnect & load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+    <slot name="seo" />
+    <script>
+      // Respect system preference on first paint
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if ((stored === 'dark') || (!stored && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+    <!-- Cloudflare Web Analytics (respect DNT) -->
+    <script>
+      if (navigator.doNotTrack !== '1') {
+        const s = document.createElement('script');
+        s.defer = true;
+        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        s.setAttribute('data-cf-beacon', JSON.stringify({ token: 'YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN' }));
+        document.head.appendChild(s);
+      }
+    </script>
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  </head>
+  <body class="bg-bgLight dark:bg-bgDark">
+    <a href="#content" class="skip-link">Skip to content</a>
+    <slot />
+  </body>
+  
+</html>

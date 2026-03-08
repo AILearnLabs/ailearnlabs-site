@@ -16,10 +16,15 @@ const features = [
   { title: 'Weekly digest', description: 'A curated email with the best updates.', icon: 'M4 6l8 6 8-6' },
 ];
 
+const firstTutorialTitle = 'How we built a 6,000€ LLM PC (and what we learned the hard way)';
+const firstTutorialIntro =
+  'In October 2025, we built a local‑AI desktop that runs large language models on our own hardware without cloud GPU bills or uploading private data.';
+const firstTutorialTeaser =
+  'This is the plain‑language story of the build: why each part was chosen, what trade‑offs we accepted, and the pitfalls we hit so you do not have to.';
+
 const faqs = [
   { q: 'Who is AILearnLabs for?', a: 'Builders who want to learn practical AI tools fast.' },
   { q: 'What do I get in the newsletter?', a: 'Actionable tutorials, honest tool reviews, and mini-projects.' },
-  { q: 'Is there a free resource?', a: 'Yes — the AI Starter Guide (PDF) with a 12-page quickstart.' },
   { q: 'How often do you email?', a: 'Weekly, with occasional bonus resources.' },
   { q: 'Can I unsubscribe?', a: 'Of course. Every email includes a one-click unsubscribe.' },
   { q: 'Do you spam or sell data?', a: 'No spam. We never sell your data. See Privacy Policy.' },
@@ -45,7 +50,7 @@ const testimonials = [
           <h1 class="text-4xl sm:text-5xl font-bold">Learn AI tools faster</h1>
           <p class="muted mt-4 text-lg">Actionable tutorials, tool reviews, and mini-projects. No fluff—just what helps you build.</p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#newsletter" class="btn btn-primary">Get the free starter guide</a>
+            <a href="#tutorials" class="btn btn-primary">Read the first tutorial</a>
             <a href="#newsletter" class="btn btn-secondary">Join the newsletter</a>
           </div>
           <div class="mt-8">
@@ -58,8 +63,211 @@ const testimonials = [
           </div>
         </div>
         <div class="relative">
-          <img src="/guide-mockup.svg" alt="AI Starter Guide preview" class="w-full max-w-md mx-auto" />
+          <div class="rounded-2xl border border-slate-200 dark:border-slate-700 p-6 bg-white/80 dark:bg-slate-900/40 shadow-sm">
+            <p class="text-sm uppercase tracking-wide text-slate-500">Tutorial spotlight</p>
+            <h2 class="text-2xl font-semibold mt-3">{firstTutorialTitle}</h2>
+            <p class="muted mt-3">{firstTutorialIntro}</p>
+            <p class="muted mt-3">{firstTutorialTeaser}</p>
+            <ol class="mt-4 space-y-2">
+              <li class="flex gap-2">
+                <span class="font-semibold text-primary">•</span>
+                <span class="muted">Focus on the GPU first, then build a stable system around it.</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="font-semibold text-primary">•</span>
+                <span class="muted">Learn the real‑world trade‑offs: heat, noise, size, and cost.</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="font-semibold text-primary">•</span>
+                <span class="muted">Avoid the pitfalls we hit: power connectors, RAM training, airflow.</span>
+              </li>
+            </ol>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Tutorials -->
+    <section id="tutorials" class="section">
+      <div class="container">
+        <h2 class="section-title">Tutorials</h2>
+        <article class="rounded-2xl border border-slate-200 dark:border-slate-700 p-6 bg-white/80 dark:bg-slate-900/40">
+          <header class="max-w-3xl">
+            <p class="text-sm uppercase tracking-wide text-slate-500">Tutorial 01</p>
+            <h3 class="text-2xl font-semibold mt-2">{firstTutorialTitle}</h3>
+            <p class="muted mt-3">{firstTutorialIntro}</p>
+          </header>
+
+          <div class="mt-6 space-y-6">
+            <section class="space-y-3">
+              <p class="muted">
+                We set a strict budget of about 6,000€ for the whole setup, including a serious monitor and the small comforts that make a
+                workstation pleasant to use every day.
+              </p>
+              <p class="muted">
+                Think of an “LLM PC” like a fast kitchen for a huge recipe book. The recipe book is the model. The GPU does most of the cooking.
+                Everything else exists to feed it, keep it stable, keep it cool, and keep your day‑to‑day work smooth.
+              </p>
+              <p class="muted">
+                This story is written in plain language so you can understand why each part was chosen, what trade‑offs we accepted, and what to
+                watch out for if you build your own.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">The one decision that drives everything: the GPU</h4>
+              <p class="muted">
+                The graphics card is the engine of an LLM PC. The key number is GPU memory (VRAM). If VRAM is big enough, the model stays fast. If
+                it is too small, the model spills into system RAM or SSD storage and becomes dramatically slower.
+              </p>
+              <p class="muted">
+                We chose an NVIDIA GeForce RTX 5090 with 32GB of VRAM. It is expensive (about 2,700€) but it is the main instrument for local LLM
+                work. Cut the GPU tier too far and you do not get a “slightly slower” machine—you get a different class of machine with smaller
+                models and constant compromises.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">The CPU: keeps the system feeling “snappy”</h4>
+              <p class="muted">
+                The CPU is the sous‑chef. It keeps everything responsive while the GPU does the heavy lifting. We selected an AMD Ryzen 9 7950X,
+                a 16‑core, 32‑thread desktop processor, so the workstation stays calm under stress.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">The motherboard: the road system</h4>
+              <p class="muted">
+                We chose the GIGABYTE X670E AORUS MASTER for its strong power delivery, PCIe 5.0 readiness, and multiple M.2 slots. A good board
+                prevents unstable power, port shortages, and noisy thermals.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">System RAM: the cabinet next to the desk</h4>
+              <p class="muted">
+                RAM is not the GPU desk—it is the cabinet right next to it. We chose 128GB DDR5 (4×32GB Kingston FURY Beast DDR5‑5200) so the
+                system does not choke when several AI tools, browsers, and files are open at once.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Storage: where models live</h4>
+              <p class="muted">
+                We installed two Samsung 990 PRO 4TB NVMe drives (8TB total). One holds the OS and apps, the other holds model files and datasets.
+                Fast SSDs make local AI feel convenient, not fragile.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Power supply: the part beginners underestimate most</h4>
+              <p class="muted">
+                Modern GPUs spike in power. We chose a Corsair HX1200i (1200W) with ATX 3.1 support and the PCIe 5.1 12V‑2x6 cable. Stability is
+                worth the money.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Cooling: keeping the kitchen calm</h4>
+              <p class="muted">
+                High‑performance parts create heat. We used an ARCTIC Liquid Freezer III 360 AIO cooler so the CPU stays under control without the
+                fans screaming constantly.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Case and airflow: performance you can feel</h4>
+              <p class="muted">
+                We chose the Fractal Design Torrent (Black Solid) and added a Fractal Dynamic X2 GP‑14 fan. For a flagship GPU, airflow is
+                performance.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Monitor and peripherals: your human interface</h4>
+              <p class="muted">
+                We used the Dell UltraSharp U3223QE 32‑inch 4K USB‑C hub monitor, a Logitech MX Keys S keyboard, and a Logitech M330 Silent Plus
+                mouse. Powerful hardware is wasted if the daily experience is cramped or annoying.
+              </p>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Putting it together: what the build actually feels like</h4>
+              <div class="space-y-3 muted">
+                <p>Build the motherboard outside the case first. It is the least stressful way to see every step clearly.</p>
+                <p>Seat the CPU carefully—if it is aligned, it drops in without force. RAM takes more pressure than most beginners expect.</p>
+                <p>Install SSDs early; it is fast and satisfying. Route cables slowly for airflow and safety.</p>
+                <p>
+                  The GPU is the moment of truth. Use any support bracket available, and double‑check the power connector—fully seated, no sharp
+                  bends.
+                </p>
+                <p>First boot can involve restarts for RAM training. That is normal. Update BIOS early for stability improvements.</p>
+              </div>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Pitfalls we hit (so you do not have to)</h4>
+              <ul class="space-y-2 muted list-disc pl-5">
+                <li>First boot often feels wrong before it feels right—RAM training can cause multiple restarts.</li>
+                <li>High‑end parts do not guarantee stability. The “boring” parts (PSU, cooling, airflow) carry the build.</li>
+                <li>GPU power connectors must be fully seated. “Almost in” is not in.</li>
+                <li>Flagship GPUs are physically large. Plan for airflow and cable clearance.</li>
+              </ul>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">The honest drawbacks of our system</h4>
+              <ul class="space-y-2 muted list-disc pl-5">
+                <li>32GB VRAM is huge, but not infinite—some models will still not fit comfortably.</li>
+                <li>High‑power hardware means heat and noise under sustained load.</li>
+                <li>The system is physically large and heavy.</li>
+                <li>Flagship GPUs dominate the budget and the value curve moves fast.</li>
+              </ul>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">Rough budget breakdown (rounded on purpose)</h4>
+              <div class="grid gap-4 sm:grid-cols-2 muted">
+                <div class="rounded-lg border border-slate-200 dark:border-slate-700 p-4 bg-white/70 dark:bg-slate-900/40">
+                  <p class="font-semibold text-slate-700 dark:text-slate-200">Core hardware</p>
+                  <p class="mt-2">GPU ~2,700€ · CPU + motherboard ~800€ · RAM ~300€ · Storage ~600€</p>
+                </div>
+                <div class="rounded-lg border border-slate-200 dark:border-slate-700 p-4 bg-white/70 dark:bg-slate-900/40">
+                  <p class="font-semibold text-slate-700 dark:text-slate-200">Power + comfort</p>
+                  <p class="mt-2">PSU + case ~500€ · Cooling + fans ~100€ · Monitor ~800€ · Keyboard + mouse ~150€</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="space-y-4">
+              <h4 class="text-lg font-semibold">If you build your own, copy the logic, not the exact parts</h4>
+              <p class="muted">
+                Decide your GPU first, then build a stable support system around it. If your budget is lower, choose a more modest GPU tier but keep
+                the foundation solid.
+              </p>
+              <p class="muted">The next tutorial will cover operating system installation and the first AI software setup, step by step.</p>
+            </section>
+
+            <section class="space-y-3">
+              <h4 class="text-lg font-semibold">Official product pages used for specs and images</h4>
+              <div class="grid gap-2 text-sm">
+                <a class="text-primary hover:underline" href="https://www.nvidia.com/ro-ro/geforce/graphics-cards/50-series/rtx-5090/" target="_blank" rel="noreferrer">NVIDIA GeForce RTX 5090</a>
+                <a class="text-primary hover:underline" href="https://nvidianews.nvidia.com/news/nvidia-blackwell-geforce-rtx-50-series-opens-new-world-of-ai-computer-graphics" target="_blank" rel="noreferrer">NVIDIA GeForce RTX 50 Series announcement</a>
+                <a class="text-primary hover:underline" href="https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-9-7950x.html" target="_blank" rel="noreferrer">AMD Ryzen 9 7950X</a>
+                <a class="text-primary hover:underline" href="https://www.gigabyte.com/Motherboard/X670E-AORUS-MASTER-rev-1x" target="_blank" rel="noreferrer">GIGABYTE X670E AORUS MASTER</a>
+                <a class="text-primary hover:underline" href="https://www.kingston.com/datasheets/KF552C40BBK4-128.pdf" target="_blank" rel="noreferrer">Kingston FURY Beast KF552C40BBK4-128 datasheet (PDF)</a>
+                <a class="text-primary hover:underline" href="https://www.samsung.com/de/memory-storage/nvme-ssd/990-pro-4tb-nvme-pcie-gen-4-mz-v9p4t0bw/" target="_blank" rel="noreferrer">Samsung 990 PRO 4TB</a>
+                <a class="text-primary hover:underline" href="https://www.corsair.com/us/en/p/psu/cp-9020281-na/hx1200i-fully-modular-ultra-low-noise-platinum-atx-1200-watt-pc-power-supply-cp-9020281-na" target="_blank" rel="noreferrer">Corsair HX1200i</a>
+                <a class="text-primary hover:underline" href="https://www.fractal-design.com/products/cases/torrent/torrent/black-solid/" target="_blank" rel="noreferrer">Fractal Design Torrent Black Solid</a>
+                <a class="text-primary hover:underline" href="https://www.fractal-design.com/products/fans/dynamic/dynamic-x2-gp-14/" target="_blank" rel="noreferrer">Fractal Design Dynamic X2 GP‑14 fan</a>
+                <a class="text-primary hover:underline" href="https://www.arctic.de/en/Liquid-Freezer-III-360/ACFRE00136A" target="_blank" rel="noreferrer">ARCTIC Liquid Freezer III 360</a>
+                <a class="text-primary hover:underline" href="https://www.dell.com/en-us/shop/dell-ultrasharp-32-4k-usb-c-hub-monitor-u3223qe/apd/210-bdph/monitors-monitor-accessories" target="_blank" rel="noreferrer">Dell UltraSharp U3223QE</a>
+                <a class="text-primary hover:underline" href="https://www.logitech.com/en-eu/products/keyboards/mx-keys-s.920-011565.html" target="_blank" rel="noreferrer">Logitech MX Keys S</a>
+                <a class="text-primary hover:underline" href="https://www.logitech.com/en-eu/products/mice/m330-silent-plus-mouse.910-004909.html" target="_blank" rel="noreferrer">Logitech M330 Silent Plus</a>
+              </div>
+            </section>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -96,16 +304,11 @@ const testimonials = [
 
     <!-- Newsletter -->
     <section id="newsletter" class="section bg-slate-50 dark:bg-slate-900/30">
-      <div class="container grid gap-8 lg:grid-cols-2 items-start">
-        <div>
-          <h2 class="section-title">Get the free starter guide</h2>
-          <p class="muted">Grab the AI Starter Guide (PDF). A 12-page quickstart to the tools you’ll actually use.</p>
-          <div class="mt-6">
-            <NewsletterForm />
-          </div>
-        </div>
-        <div id="guide" class="rounded-xl border border-slate-200 dark:border-slate-700 p-6 bg-white/70 dark:bg-slate-900/40">
-          <img src="/guide-mockup.svg" alt="AI Starter Guide cover" class="w-full" />
+      <div class="container">
+        <h2 class="section-title">Get weekly tutorials and tool picks</h2>
+        <p class="muted">Short lessons, honest reviews, and mini-projects you can ship fast.</p>
+        <div class="mt-6 max-w-xl">
+          <NewsletterForm />
         </div>
       </div>
     </section>
@@ -151,4 +354,3 @@ const testimonials = [
 
   <Footer />
 </Base>
-

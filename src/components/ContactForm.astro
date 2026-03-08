@@ -1,7 +1,8 @@
 ---
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const hasTurnstile = Boolean(siteKey);
 ---
-<form id="contact" class="w-full max-w-2xl" method="POST" action="/submit">
+<form id="contact-form" class="w-full max-w-2xl" method="POST" action="/submit">
   <input type="hidden" name="type" value="contact" />
   <div class="grid sm:grid-cols-2 gap-3">
     <div>
@@ -17,18 +18,20 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     <label for="message" class="block text-sm mb-1">Message</label>
     <textarea id="message" name="message" rows="4" required placeholder="How can we help?" class="w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2"></textarea>
   </div>
-  <div class="mt-3">
-    <div class="cf-turnstile" data-sitekey={siteKey} data-size="compact"></div>
-  </div>
+  {hasTurnstile && (
+    <div class="mt-3">
+      <div class="cf-turnstile" data-sitekey={siteKey} data-size="compact"></div>
+    </div>
+  )}
   <div class="mt-4 flex items-center gap-3">
     <button type="submit" class="btn btn-primary">Send message</button>
     <p id="c-error" class="text-red-600 hidden" role="alert"></p>
   </div>
 </form>
 
-<script type="module">
+<script>
   import { isValidEmail, validateMessage } from "../lib/validate";
-  const form = document.getElementById('contact');
+  const form = document.getElementById('contact-form');
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formEl = e.currentTarget instanceof HTMLFormElement ? e.currentTarget : null;
@@ -63,3 +66,4 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     }
   });
 </script>
+

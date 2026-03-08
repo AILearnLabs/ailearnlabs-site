@@ -4,6 +4,10 @@ const { title = "AILearnLabs", description = "Learn AI tools faster. Build proje
   title?: string;
   description?: string;
 };
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const hasTurnstile = Boolean(turnstileSiteKey);
+const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN ?? "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
+const hasAnalyticsToken = analyticsToken !== "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
 ---
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
@@ -25,18 +29,21 @@ const { title = "AILearnLabs", description = "Learn AI tools faster. Build proje
         document.documentElement.classList.add('dark');
       }
     </script>
-    <!-- Cloudflare Web Analytics (respect DNT) -->
-    <script>
-      if (navigator.doNotTrack !== '1') {
-        const s = document.createElement('script');
-        s.defer = true;
-        s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
-        s.setAttribute('data-cf-beacon', JSON.stringify({ token: 'YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN' }));
-        document.head.appendChild(s);
-      }
-    </script>
+    <!-- Cloudflare Web Analytics (respect DNT, skip localhost/dev) -->
+    {hasAnalyticsToken && (
+      <script define:vars={{ analyticsToken }}>
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        if (navigator.doNotTrack !== '1' && !isLocal) {
+          const s = document.createElement('script');
+          s.defer = true;
+          s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+          s.setAttribute('data-cf-beacon', JSON.stringify({ token: analyticsToken }));
+          document.head.appendChild(s);
+        }
+      </script>
+    )}
     <!-- Cloudflare Turnstile -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    {hasTurnstile && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
   </head>
   <body class="bg-bgLight dark:bg-bgDark">
     <a href="#content" class="skip-link">Skip to content</a>
@@ -44,3 +51,4 @@ const { title = "AILearnLabs", description = "Learn AI tools faster. Build proje
   </body>
   
 </html>
+

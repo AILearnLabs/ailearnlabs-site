@@ -1,7 +1,8 @@
 ---
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const hasTurnstile = Boolean(siteKey);
 ---
-<form id="newsletter" class="w-full max-w-xl" method="POST" action="/submit">
+<form id="newsletter-form" class="w-full max-w-xl" method="POST" action="/submit">
   <input type="hidden" name="type" value="newsletter" />
   <input type="hidden" name="source" value="landing" />
   <div class="flex flex-col sm:flex-row gap-3">
@@ -9,16 +10,18 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     <input id="email" name="email" type="email" required placeholder="you@example.com" class="flex-1 rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2" />
     <button type="submit" class="btn btn-primary">Get the free starter guide</button>
   </div>
-  <div class="mt-3">
-    <div class="cf-turnstile" data-sitekey={siteKey} data-size="compact"></div>
-  </div>
+  {hasTurnstile && (
+    <div class="mt-3">
+      <div class="cf-turnstile" data-sitekey={siteKey} data-size="compact"></div>
+    </div>
+  )}
   <p class="muted text-sm mt-2">No spam. Unsubscribe anytime.</p>
   <p id="nl-error" class="mt-2 text-red-600 hidden" role="alert"></p>
 </form>
 
-<script type="module">
+<script>
   import { isValidEmail } from "../lib/validate";
-  const form = document.getElementById('newsletter');
+  const form = document.getElementById('newsletter-form');
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formEl = e.currentTarget instanceof HTMLFormElement ? e.currentTarget : null;
@@ -47,3 +50,5 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     }
   });
 </script>
+
+

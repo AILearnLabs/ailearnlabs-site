@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "pages:dev": "wrangler pages dev ./dist",
-    "lint": "eslint . --ext .ts,.tsx,.astro",
+    "lint": "eslint src functions tests --ext .ts,.tsx,.astro",
     "format": "prettier -w .",
     "test": "vitest run"
   },
@@ -34,3 +34,4 @@
     "wrangler": "^3.57.0"
   }
 }
+

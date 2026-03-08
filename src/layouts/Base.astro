@@ -1,9 +1,5 @@
 ---
 import "../styles/globals.css";
-const { title = "AILearnLabs", description = "Learn AI tools faster. Build projects that matter." } = Astro.props as {
-  title?: string;
-  description?: string;
-};
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 const hasTurnstile = Boolean(turnstileSiteKey);
 const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN ?? "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKEN";
@@ -51,4 +47,5 @@ const hasAnalyticsToken = analyticsToken !== "YOUR_CLOUDFLARE_WEB_ANALYTICS_TOKE
   </body>
   
 </html>
+
 

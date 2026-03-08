@@ -29,7 +29,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token, remoteip: ip }),
       headers: { "content-type": "application/x-www-form-urlencoded" },
     });
-    const verifyData = await verifyRes.json<any>();
+    const verifyData = (await verifyRes.json()) as { success?: boolean };
     if (!verifyData?.success) {
       return json({ error: "Turnstile verification failed" }, 400);
     }
@@ -93,3 +93,4 @@ async function hash(input: string): Promise<string> {
   const bytes = Array.from(new Uint8Array(digest));
   return bytes.map((b) => b.toString(16).padStart(2, "0")).join("");
 }
+
